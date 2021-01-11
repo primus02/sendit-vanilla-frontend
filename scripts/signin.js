@@ -7,7 +7,7 @@ const signinButton= document.querySelector(".sign-in-btn");
 
 const image = document.querySelector("img");
 
-const url = "https://sendit.herokuapp.com/";
+const url = "https://sendit.herokuapp.com";
 
 
 let counter = 0;
