@@ -1,6 +1,6 @@
 
 // Selectors
-const url = "https://sendit.herokuapp.com/";
+const url = "https://sendit.herokuapp.com";
 
 const username = localStorage.getItem("username");
 
