@@ -19,7 +19,7 @@ const destination = document.querySelector(".destination");
   
 const signOutButton = document.querySelector(".sign-out");
 
-const url = "https://sendit.herokuapp.com/";
+const url = "https://sendit.herokuapp.com";
 
 const token = localStorage.getItem("token");
 
