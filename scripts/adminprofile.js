@@ -1,6 +1,6 @@
 
 // Selectors
-const url = "http://localhost:3000";
+const url = "https://sendit.herokuapp.com/";
 
 const username = localStorage.getItem("username");
 
