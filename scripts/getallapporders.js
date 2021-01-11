@@ -25,7 +25,7 @@ ordersContainer.addEventListener("keyup",(e)=>{
 });
 
 
-const url = "https://sendit.herokuapp.com/";
+const url = "https://sendit.herokuapp.com";
 
 const token = localStorage.getItem("token");
 
