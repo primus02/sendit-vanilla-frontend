@@ -3,7 +3,7 @@ const username = localStorage.getItem("username");
 const userName = document.querySelector(".username");
 userName.innerHTML = username;
 
-const url = "https://sendit.herokuapp.com/";
+const url = "https://sendit.herokuapp.com";
 
 const token = localStorage.getItem("token");
 
