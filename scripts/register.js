@@ -6,7 +6,7 @@ const userName = document.getElementsByClassName("input-username")[0];
 const email = document.getElementsByClassName("input-email")[0];
 const password = document.getElementsByClassName("input-password")[0];
 
-const url = "https://sendit.herokuapp.com/";
+const url = "https://sendit.herokuapp.com";
 
 const image = document.querySelector("img");
 
