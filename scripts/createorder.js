@@ -16,7 +16,7 @@ const userName = localStorage.getItem("username");
 
 document.querySelector(".username").innerHTML= userName;
 
-const url= "http://localhost:3000";
+const url = "https://sendit.herokuapp.com/";
 
 // Event Listeners
 inputWeight.addEventListener("keyup", calculatePrice);
