@@ -21,7 +21,7 @@ signOutButton.addEventListener("click", ()=>{
     window.location.href = "index.html";
 });
 
-const url = "http://localhost:3000";
+const url = "https://sendit.herokuapp.com/";
 
 const token = localStorage.getItem("token");
 
