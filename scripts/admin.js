@@ -5,7 +5,7 @@ const inputPassword= document.querySelector(".password");
 
 const signinButton= document.querySelector(".admin-signin");
 
-const url = "https://sendit.herokuapp.com/";
+const url = "https://sendit.herokuapp.com";
 
 // Event Listeners
 signinButton.addEventListener("click", signAdminIn);
