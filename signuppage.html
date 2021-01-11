@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8"/>
+       
+      <title>SendIT Project</title>
+       
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	   
+      <link rel="stylesheet" type="text/css" href="main.css">
+       
+   </head>
+   <body>
+       <nav> 
+           <ul class="nav">
+               <li><a href="aboutus.html">About Us</a></li>
+               <li><a href="contact.html">Contact Us</a></li>
+               <li><a href="index.html">Home Page</a></li>
+             <li class="admin"><a href="adminsignin.html">Admin</a></li>
+           </ul>
+       </nav>
+       
+       <div class="sign">
+           
+		   <h3>Register Here</h3>
+		   
+           <form id="myform">
+              <label>Name:</label>
+              <input type="text" class="input-name" placeholder="Enter your name!" required/><br>
+               
+              <label>Username:</label>
+              <input type="text" class="input-username" placeholder="Enter a username!" required/><br>
+               
+             <label>Email Address:</label>
+             <input type="email" class="input-email" placeholder="Enter a valid email!" required/><br>
+               
+             <label>Password:</label>
+             <input type="password" class="input-password" placeholder="Enter a passowrd!" required />
+               
+            <p class="error d-none" ></p>
+               
+            <p><button type="submit" class="create-acct">Create Account</button></p>
+               
+           </form>
+
+       </div>
+       
+       <div class="main-body">
+           <header>
+			   <h1> Welcome to <emp>SendIt!</emp></h1>
+               <p>SendIT is a courier service that helps users deliver parcels to different destinations.<br> SendIT provides quotes based on weight categories and offer services all over the country.</p>
+           </header>
+
+
+           <div class="body">
+               <img src="images/delivery1.jpg">
+      
+           </div>
+       </div>
+       
+       
+       <script src="./scripts/register.js"></script>
+   </body>
+    
+    
+    
+    
+</html>

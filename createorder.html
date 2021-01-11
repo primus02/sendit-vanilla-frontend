@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8"/>
+       
+      <title>SendIT Project</title>
+	   
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+       
+      <link rel="stylesheet" type="text/css" href="main.css">
+       
+   </head>
+   <body>
+       <nav> 
+           <ul class="nav">
+             <li class="profile"><a href="profile.html">Profile</a></li>
+             <li><a href="getallorders.html">Get all orders</a></li>
+             <li class="sign-out">Sign out</li>
+           </ul>
+       </nav>
+       
+       
+       
+       <div class="main-body">
+           <header>
+               <h1> Hello <span class="username"> </span>!</h1>
+               <p>SendIT courier service is available to meet your delivery needs around the clock.</p>
+           </header>
+
+
+           <div class="body">
+               
+                   <h3>Before creating an order, kindly note the following:</h3>
+               
+                  <ul>
+                    <li>1. Price is calculated based on the weight of your order. <br> It is presently x10 of the weight of your order. </li>
+                    <li>2. Order can no longer be cancelled once the status<br> has changed to "Delivered". </li>
+                  </ul>
+               
+                 <p>Being aware of these, do follow the below designed pattern to create your order.</p>
+                    
+              <form>
+
+                  <label>Pick-Up Location:</label>
+                  <input type="text" class="input-location" placeholder="Location"><br>
+
+                  <label>Destination: </label>
+                  <input type="text" class="input-dest" placeholder="Destination"><br>
+				  
+				  <label>Recipient Mobile: </label>
+                  <input type="text" class="input-mobile" placeholder="Mobile number"><br>
+
+                 <label>Weight(Kg):</label>
+                 <input type="text" class="input-wt" placeholder="weight in kg"><br>
+
+                 <label>Price(#):</label>
+                 <input type="number" class="input-price" placeholder="price" disabled>
+
+                <p class="error d-none" ></p>
+
+                <p><button type="submit" class="submit-order">Submit</button></p>
+               
+           </form>
+            
+           </div>
+       </div>
+       
+       
+       <script src="./scripts/createorder.js"></script>
+   </body>
+    
+    
+    
+    
+</html>

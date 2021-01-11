@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8"/>
+       
+      <title>SendIT Project</title>
+	   
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+       
+      <link rel="stylesheet" type="text/css" href="main.css">
+	   
+       
+   </head>
+   <body>
+       <nav> 
+           <ul class="nav">
+             <li><a href="profile.html">Profile</a></li>
+             <li><a href="createorder.html">Create Order</a></li>
+             <li><a href="getallorders.html">Get all orders</a></li>
+             <li class="sign-out">Sign out</li>
+           </ul>
+       </nav>
+       
+       
+       
+       <div class="main-body">
+           <header>
+               <h1> Hello <span class="username"></span>!</h1>
+           </header>
+
+
+           <div class="body">
+               
+               <h3>Here are the details of your order.</h3>
+                    
+                <p> Use the edit button to change the destination of your order and <br> the cancel button to cancel your order</p>
+               
+                <div class="orders order-details">  
+                    <p class="order">Order details;</p>
+                    
+					<div class="order-info">
+						<label>Price(#): <span class="price"> </span></label><br>
+
+						<label>Pick-Up Location: <span class="location"></span></label><br>
+
+						<label>Destination: <span class="destination"></span></label><br>
+
+						<label>Recipient Mobile: <span class="mobile"></span></label><br>
+
+						<label>Date of creation: <span class="date"></span></label>
+
+						<p><button class="edit">Edit-Destination</button><button class="cancel">Cancel-Order</button></p>
+					</div>
+               </div>
+
+               
+           </div>
+       </div>
+       
+       
+       <script src="./scripts/orderdetails.js"></script>
+   </body>
+    
+    
+    
+    
+</html>

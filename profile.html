@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8"/>
+       
+      <title>SendIT Project</title>
+       
+      <link rel="stylesheet" type="text/css" href="main.css">
+       
+   </head>
+   <body>
+       <nav> 
+           <ul class="nav">
+             <li><a href="createorder.html">Create Order</a></li>
+             <li><a href="getallorders.html">Get all orders</a></li>
+             <li class="sign-out">Sign out</li>
+           </ul>
+       </nav>
+       
+       
+       
+       <div class="main-body profile-info">
+           <header>
+               <h1> Hello <span class="username"></span>!</h1>
+               <div class="details">
+                   <h3><label>Username: </label> <span class="username"></span></h3>
+                   <h3><label>Name: </label><span class="name"></span></h3>
+                   <h3><label>Email: </label> <span class="email"></span></h3>
+               </div>
+           </header>
+
+
+           <div class="body">
+               
+                <h3>Your order history is as displayed;</h3>
+               
+                <div class="details">  
+                    <h3><label>Total number of orders: </label><span class="total-num"> </span></h3>  
+                    <h3><label>Total number of completed orders: </label> <span class="total-completed"></span></h3> 
+                    <h3><label>Total number of In-transit orders: </label> <span class="total-transit"></span></h3> 
+               </div>
+               
+           </div>
+       </div>
+       
+       
+       <script src="scripts/profile.js"></script>
+   </body>
+    
+    
+    
+    
+</html>
