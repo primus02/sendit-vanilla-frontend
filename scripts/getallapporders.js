@@ -79,12 +79,39 @@ fetch(`${url}/get-all-orders`, {
         
         statusButtons.forEach((button)=>{ button.addEventListener("click", ()=>{
             const orderId = button.getAttribute("id");
-            localStorage.setItem("orderId", orderId);
+			
+			let newStatus = prompt("Kindly enter the new status of this order");
+			
+			if(newStatus){
             
-            const status = button.getAttribute("status");
-            localStorage.setItem("status", status);
-            
-            window.location.href = "changestatus.html";
+			 fetch(`${url}/change-status/${orderId}`, {
+    method: "PATCH",
+    headers: {
+        "Content-Type": "application/json", 
+         Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+        status: newStatus.toLowerCase()
+    })
+})
+.then(res=> res.json())
+.then(res=>{
+    if(res.message=== `Order ${orderId} updated successfully`){
+		
+       toastr.success("Success, order's new status updated!");
+        
+		setTimeout(()=>{ window.location.href ="getallapporders.html";}, 2000);
+        
+    }
+    
+})
+.catch(err=>{
+    console.log("Error", err);
+});
+	}
+     else{
+		 return;
+	 }       
         });
     });
 		
@@ -92,9 +119,42 @@ fetch(`${url}/get-all-orders`, {
         
         locationButtons.forEach((button)=>{ button.addEventListener("click", ()=>{
             const orderId = button.getAttribute("id");
-            localStorage.setItem("orderId", orderId);
-            
-            window.location.href = "changelocation.html";
+           
+			let newLocation = prompt("Kindly enter the present location of this order");
+			
+			if(newLocation){
+				
+				        fetch(`${url}/change-location/${orderId}`, {
+    method: "PATCH",
+    headers: {
+        "Content-Type": "application/json", 
+         Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+        preslocation: newLocation
+    })
+})
+.then(res=> res.json())
+.then(res=>{
+    if(res.message=== `Order ${orderId} updated successfully`){
+       toastr.success("Success, order's present location updated!");
+        
+		setTimeout(()=>{  window.location.href ="getallapporders.html";}, 2000);
+       
+    }
+    
+})
+.catch(err=>{
+    console.log("Error", err);
+});
+			}
+			else{
+				return;
+			}
+//    }
+//}
+//			}
+			
         });
     });
 
