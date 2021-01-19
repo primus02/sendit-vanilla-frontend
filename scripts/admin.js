@@ -32,14 +32,8 @@ function signAdminIn(){
         .then(res=>res.json())
         .then(res=>{
         
-        if(res.message=== "Username invalid"){
-            toastr.error("Kindly provide a valid username!");
-			inputUsername.focus();
-            return;
-        }
-        else if(res.message=== "Password invalid" || res.message=== "Auth failed"){
-            toastr.error("Kindly provide a valid password!");
-            inputPassword.focus();
+        if(res.message=== "Username invalid" || res.message=== "Password invalid" || res.message=== "Auth failed"){
+            toastr.error("invalid username / password!");
             return;
         }
         else if(res.token){
