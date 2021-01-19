@@ -36,17 +36,24 @@ function calculatePrice(){
 function submitOrder(e){
     e.preventDefault();
 	
+	  const number = 234;
+      const regex= /^[0-9]+$/;
+
     if(inputLocation.value ==="" || inputDestination.value ==="" || inputPrice.value ==="" || inputWeight.value ==="" || inputMobile.value===""){
 		
         toastr.warning("Kindly provide all necessary fields");
         return;
     }
-   if(inputMobile.value.length < 11 || inputMobile.value.length >11){
-		
-		toastr.error("Mobile must be 11 digits");
-		inputMobile.focus();
-		return false;
+	
+	if(!inputMobile.value.includes(number) || !inputMobile.value.match(regex) || inputMobile.value.length < 13 || inputMobile.value.length > 13){
+		  toastr.error("Kindly provide a valid phone number");
+		  return false;
+	  }
+	if(!inputWeight.value.match(regex)){
+		toastr.info("Do not include any letter in the weight field");
+		return;
 	}
+	
     else{
         fetch(`${url}/create-order`, {
             method: "POST",
