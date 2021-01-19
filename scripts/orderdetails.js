@@ -40,23 +40,77 @@ signOutButton.addEventListener("click", ()=>{
 
 editButton.addEventListener("click", ()=>{
     if(status === "pending"){
-    window.location.href ="changedestination.html";
+    let newDestination =prompt("Kindly provide the new destination for this order");
+		
+		if(newDestination){
+			
+		fetch(`${url}/change-destination/search?username=${username}&id=${orderId}`, {
+        method: "PATCH",
+        headers: {
+        "Content-Type": "application/json", 
+         Authorization: `Bearer ${token}`
+       },
+       body: JSON.stringify({
+        destination: newDestination
+      })
+})
+.then(res=> res.json())
+.then(res=>{
+    if(res.message=== `Order ${orderId} updated successfully`){
+		
+       toastr.success("Success, your order's new destination updated");
+        
+		setTimeout(()=>{ window.location.href ="getallorders.html";}, 2000);
+        
     }
+    
+})
+.catch(err=>{
+    console.log("Error", err);
+});
+		}
+		else{
+			return;
+		}
+	}
     else{
         toastr.info("Sorry! This order has already been delivered, else, you can no longer change its destination");
         return;
-		editButton.classList.add("d-none");
     }
-})
+});
 
 cancelButton.addEventListener("click", ()=>{
     if(status === "pending"){
-    window.location.href ="cancelorder.html";
+     let decision= confirm("Are you sure you want to cancel this order?");
+		if(decision){
+			fetch(`${url}/cancel-order/search?username=${username}&id=${orderId}`, {
+            method: "DELETE",
+            headers: {
+		   "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+    }
+})
+.then(res=> res.json())
+.then(res=> {
+    if(res.success){
+		
+       toastr.success("Success, your order has been cancelled");
+        
+		setTimeout(()=>{ window.location.href = "getallorders.html";}, 2000);
+        
+    }
+})
+.catch(err=> {
+		console.log("Error", err);
+	});
+		}
+		else{
+			return;
+		}
     }
     else{
         toastr.info("Sorry! This order has already been delivered");
         return;
-		cancelButton.classList.add("d-none");
     }
 })
 
