@@ -1,5 +1,5 @@
 // Selectors
-const url = "https://sendit.herokuapp.com";
+const url = "http://localhost:3000";
 
 const username = localStorage.getItem("username");
 
@@ -9,6 +9,10 @@ const email = localStorage.getItem("email");
 
 const token = localStorage.getItem("token");
 
+const mobile = localStorage.getItem("mobile");
+
+const address = localStorage.getItem("address");
+
 let usernames = document.querySelectorAll(".username");
   usernames.forEach((user)=>{
       user.innerHTML = username;
@@ -16,6 +20,8 @@ let usernames = document.querySelectorAll(".username");
 
 document.querySelector(".name").innerHTML = name;
 document.querySelector(".email").innerHTML = email;
+document.querySelector(".mobile").innerHTML = mobile;
+document.querySelector(".address").innerHTML = address;
 
 const signOutButton = document.querySelector(".sign-out");
 
