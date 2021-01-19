@@ -1,12 +1,22 @@
 // Selectors
 
-const myForm = document.getElementById("myform")
+const myForm = document.getElementById("myform");
+
 const name = document.getElementsByClassName("input-name")[0];
+
 const userName = document.getElementsByClassName("input-username")[0];
+
+const mobileNumber = document.getElementsByClassName("input-mobile")[0];
+
+const contactAddress = document.getElementsByClassName("input-address")[0];
+
 const email = document.getElementsByClassName("input-email")[0];
+
 const password = document.getElementsByClassName("input-password")[0];
 
-const url = "https://sendit.herokuapp.com";
+const confirmPassword = document.getElementsByClassName("confirm-password")[0];
+
+const url = "http://localhost:3000";
 
 const image = document.querySelector("img");
 
@@ -27,8 +37,22 @@ setInterval(()=>{
 // Functions
 
   const submitForm = (event)=> {
-      event.preventDefault()
+      event.preventDefault();
+	  
+  const number = 234;
+  const regex= /^[0-9]+$/;
+  
+	  if(!mobileNumber.value.includes(number) || !mobileNumber.value.match(regex) || mobileNumber.value.length < 13 || mobileNumber.value.length > 13){
+		  toastr.error("Kindly provide a valid phone number");
+		  return false;
+	  }
 
+	  if(password.value !== confirmPassword.value){
+		  toastr.error("Passwords must match");
+		  return false;
+	  }
+	  
+   else{
   fetch(`${url}/signup`, {
     // mode: "no-cors",
     method: "POST",
@@ -38,10 +62,12 @@ setInterval(()=>{
     },
     // credentials: "include",
     body: JSON.stringify({
-    name: name.value,
+      name: name.value,
       username: userName.value.toLowerCase(),
+	  mobile: mobileNumber.value,
+	  address: contactAddress.value,
       email: email.value,
-      password: password.value,
+      password: password.value
       
     }),
   })
@@ -60,10 +86,9 @@ setInterval(()=>{
        userName.focus()
        return false
       }
+	  
       else if (res.data) {
-              localStorage.setItem("name", res.data.name);
-              localStorage.setItem("userId", res.data._id);
-		  
+      	  
 		  toastr.success('Account successfully created!');
 		  
 		  setTimeout(()=>{window.location.href = "index.html";},2000);
@@ -75,6 +100,7 @@ setInterval(()=>{
             }
           })
     .catch((err) => console.log("err occured", err));
+}
 };
 
 
