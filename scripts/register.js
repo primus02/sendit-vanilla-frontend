@@ -16,7 +16,7 @@ const password = document.getElementsByClassName("input-password")[0];
 
 const confirmPassword = document.getElementsByClassName("confirm-password")[0];
 
-const url = "http://localhost:3000";
+const url = "https://sendit.herokuapp.com";
 
 const image = document.querySelector("img");
 
