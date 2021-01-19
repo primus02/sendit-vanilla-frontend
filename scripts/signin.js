@@ -7,7 +7,7 @@ const signinButton= document.querySelector(".sign-in-btn");
 
 const image = document.querySelector("img");
 
-const url = "https://sendit.herokuapp.com";
+const url = "http://localhost:3000";
 
 
 let counter = 0;
@@ -50,14 +50,8 @@ function signUserIn(e){
         .then(res=>res.json())
         .then(res=>{
         
-        if(res.message=== "Email does not exist" && inputPassword.value !== ""){
-            toastr.error("Kindly provide a valid email!");
-            inputEmail.focus();
-            return false;
-        }
-        else if(res.message=== "Auth failed"){
-            toastr.error("Kindly provide a valid password!");
-            inputPassword.focus();
+        if(res.message=== "Email does not exist" || res.message=== "Auth failed"){
+            toastr.error("inavlid email / password!");
             return false;
         }
         else if(res.token){
@@ -65,6 +59,8 @@ function signUserIn(e){
             localStorage.setItem("username", res.data[0].username);
             localStorage.setItem("name", res.data[0].name);
             localStorage.setItem("email", res.data[0].email);
+			localStorage.setItem("mobile", res.data[0].mobile);
+			localStorage.setItem("address", res.data[0].address);
 			
 			toastr.success("Sign in successful!");
 			
