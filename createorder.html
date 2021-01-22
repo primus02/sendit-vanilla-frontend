@@ -41,24 +41,22 @@
                
                  <p>Being aware of these, do follow the below designed pattern to create your order.</p>
                     
-              <form>
+              <form id="form">
 
                   <label>Pick-Up Location:</label>
-                  <input type="text" class="input-location" placeholder="Location"><br>
+                  <input type="text" class="input-location" placeholder="Location" required/><br>
 
                   <label>Destination: </label>
-                  <input type="text" class="input-dest" placeholder="Destination"><br>
+                  <input type="text" class="input-dest" placeholder="Destination" required/><br>
 				  
 				  <label>Recipient Mobile: </label>
-                  <input type="text" class="input-mobile" placeholder="Mobile number"><br>
+                  <input type="tel" class="input-mobile" placeholder="example: +2349087564223"  pattern="\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$" required/><br>
 
                  <label>Weight(Kg):</label>
-                 <input type="text" class="input-wt" placeholder="weight in kg"><br>
+                 <input type="text" class="input-wt" placeholder="weight"/><br>
 
                  <label>Price(#):</label>
-                 <input type="number" class="input-price" placeholder="price" disabled>
-
-                <p class="error d-none" ></p>
+                 <input type="number" class="input-price" placeholder="price" disabled required/>
 
                 <p><button type="submit" class="submit-order">Submit</button></p>
                
@@ -70,6 +68,28 @@
        
        <script src="./scripts/createorder.js"></script>
    </body>
+    
+	    <script>
+//Place Autocomplete Address Google API
+    function initAutocomplete() {
+      const inputLocation = document.querySelector(".input-location");
+		
+	 const inputDestination = document.querySelector(".input-dest");
+		
+		const options = {
+    componentRestrictions: {
+        country: 'ng'
+    }
+};
+
+      const autocompleteLocation = new google.maps.places.Autocomplete(inputLocation, options);
+		
+	  const autocompleteDestination = new google.maps.places.Autocomplete(inputDestination, options);
+
+    }
+  </script>
+  <script type="text/javascript" 
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsCpECdOd6XCeKdReJj7YPQrfYVwzeKSI&libraries=places&callback=initAutocomplete"></script>
     
     
     
