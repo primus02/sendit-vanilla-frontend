@@ -25,6 +25,15 @@
        
        
        <div class="main-body">
+		   
+		   <div class="location-modal d-none">
+		       <p>Kindly provide the new location for this order below and click on the submit button</p>
+			   
+			   <input type="text" class="new-location" placeholder="Enter new location"/>
+			   
+			   <p><button>Submit</button></p>
+		   </div>
+		   
            <header>
 			   <h1> Hello Admin <span class="username"></span>!</h1>
            </header>
@@ -51,7 +60,23 @@
        <script src="./scripts/getallapporders.js"></script>
    </body>
     
+    	    <script>
+//Place Autocomplete Address Google API
+    function initAutocomplete() {
+     
+		
+		const options = {
+    componentRestrictions: {
+        country: 'ng'
+    }
+};
+
+      const autocompleteDestination = new google.maps.places.Autocomplete(newLocation, options);
+    }
     
+	</script>
+	<script type="text/javascript" 
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsCpECdOd6XCeKdReJj7YPQrfYVwzeKSI&libraries=places&callback=initAutocomplete"></script>
     
     
 </html>
