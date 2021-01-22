@@ -5,13 +5,13 @@ userName.innerHTML = username;
 
 const price = document.querySelector(".price");
 
-const createdDate = document.querySelector(".date");
+const createdDate1 = document.querySelector(".date");
 
-const pickLocation = document.querySelector(".pick-location");
+const pickLocation1 = document.querySelector(".pick-location");
 
-const recNumber = document.querySelector(".mobile");
+const recNumber1 = document.querySelector(".mobile");
 
-const destination = document.querySelector(".destination");
+const destination1 = document.querySelector(".destination");
   
 
 const signOutButton = document.querySelector(".sign-out");
@@ -39,10 +39,10 @@ fetch(`${url}/get-an-order/${orderId}`, {
 .then(res=>{
     if(res.message=== "Order found successfully"){
         price.innerHTML = res.order.price;
-        pickLocation.innerHTML = res.order.location;
-        destination.innerHTML = res.order.destination;
-	recNumber.innerHTML = res.order.recmobile;
-        createdDate.innerHTML = res.order.date;
+        pickLocation1.innerHTML = res.order.location;
+        destination1.innerHTML = res.order.destination;
+	recNumber1.innerHTML = res.order.recmobile;
+        createdDate1.innerHTML = res.order.date;
     }
     
 })
