@@ -146,9 +146,6 @@ img{
 	font-size: 20px;
 }
 
-.d-none{
-    display: none;
-}
 .create-acct{
     height: 30px;
     font-size: 16px;
@@ -203,6 +200,12 @@ img{
 .profile-info header{
 	margin-bottom: 70px;
 }
+.total-completed{
+	color: green;
+}
+.total-transit{
+	color: red;
+}
 
 /** CREATE ORDER PAGE**/
 .body p{
@@ -213,8 +216,13 @@ img{
     text-align: right;
     padding-right: 40%;
 }
+@media screen and (max-width: 540px){
+	.body form{
+	   padding-right: 25%;
+	}
+}
 .submit-order{
-    width: 200px;
+    width: 180px;
     height: 30px;
     cursor: pointer;
 }
@@ -224,6 +232,9 @@ img{
 
 /** GET ALL ORDERS PAGE **/
 
+.main-body{
+	position: relative;
+}
 button{
     margin-left: 10px;
     width: 120px;
@@ -240,19 +251,60 @@ button{
 }
 .order-details{
 	border: 1px solid lightgray;
-	width: 320px;
+	width: 340px;
 	margin: 10px auto;
 }
 .order-info{
 	text-align: left;
 	padding: 10px;
 }
-.location{
-    width: 200px;
+.order-info label{
+	font-weight: 700;
+	margin-right: 3px;
 }
+.location, .location1{
+    width: 220px;
+	height: 32px;
+}
+
+@media screen and (max-width: 630px){
+	.location{
+		margin-left: 110px;
+	}
+}
+
+@media screen and (max-width: 550px){
+	.location1{
+		margin-left: 50px;
+	}
+}
+
 .present-location{
     color: cadetblue;
 	text-transform: capitalize;
+	font-size: 12px;
+}
+.dest-modal, .location-modal{
+	width: 400px;
+	margin: 10px auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	padding: 10px;
+	background-color: white;
+	color: black;
+	position: absolute;
+	left: 50%;
+	margin-left: -200px;
+	z-index: 1;
+}
+.dest-modal input, .location-modal input{
+	width: 300px;
+	text-align: left;
+	padding: 3px;
+	margin-top: 10px;
+	height: 30px;
 }
 
 /** ADMIN PAGE **/
@@ -295,4 +347,6 @@ button{
 .admin-profile label{
 	color: #3f3a3a;
 }
-
+.d-none{
+    display: none;
+}
