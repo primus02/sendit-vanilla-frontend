@@ -34,19 +34,12 @@ setInterval(()=>{
 	counter++
 }, 5000);
 
-// Functions
+
+
 
   const submitForm = (event)=> {
       event.preventDefault();
-	  
-  const number = 234;
-  const regex= /^[0-9]+$/;
   
-	  if(!mobileNumber.value.includes(number) || !mobileNumber.value.match(regex) || mobileNumber.value.length < 13 || mobileNumber.value.length > 13){
-		  toastr.error("Kindly provide a valid phone number");
-		  return false;
-	  }
-
 	  if(password.value !== confirmPassword.value){
 		  toastr.error("Passwords must match");
 		  return false;
@@ -77,14 +70,14 @@ setInterval(()=>{
       if(res.message == "Mail exists"){
         toastr.error('Mail exists!')
 
-       email.focus()
-       return false
+       email.focus();
+       return false;
       }
 	  else if(res.message == "Username already exists"){
         toastr.error('Username exists!')
 
-       userName.focus()
-       return false
+       userName.focus();
+       return false;
       }
 	  
       else if (res.data) {
