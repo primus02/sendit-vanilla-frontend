@@ -9,6 +9,13 @@ const ordersContainer = document.querySelector(".body");
 
 const ordersHolder = document.querySelector(".orders-holder");
 
+const locationModal = document.querySelector(".location-modal");
+
+const newLocation = document.querySelector(".new-location");
+
+const newLocationButton = document.querySelector(".location-modal button");
+
+
 const signOutButton = document.querySelector(".sign-out");
 
 
@@ -19,13 +26,13 @@ signOutButton.addEventListener("click", ()=>{
 });
 
 ordersContainer.addEventListener("keyup",(e)=>{
-			let filter = e.target.value;
+  let filter = e.target.value;
 			
-			filterByUsername(filter);
+  filterByUsername(filter);
 });
 
 
-const url = "https://sendit.herokuapp.com";
+const url = "http://localhost:3000";
 
 const token = localStorage.getItem("token");
 
@@ -80,11 +87,11 @@ fetch(`${url}/get-all-orders`, {
         statusButtons.forEach((button)=>{ button.addEventListener("click", ()=>{
             const orderId = button.getAttribute("id");
 			
-			let newStatus = prompt("Kindly enter the new status of this order");
+	   let newStatus = prompt("Kindly enter the new status of this order");
 			
-			if(newStatus){
+	  if(newStatus){
             
-			 fetch(`${url}/change-status/${orderId}`, {
+   fetch(`${url}/change-status/${orderId}`, {
     method: "PATCH",
     headers: {
         "Content-Type": "application/json", 
@@ -100,7 +107,7 @@ fetch(`${url}/get-all-orders`, {
 		
        toastr.success("Success, order's new status updated!");
         
-		setTimeout(()=>{ window.location.href ="getallapporders.html";}, 2000);
+       setTimeout(()=>{ window.location.href ="getallapporders.html";}, 2000);
         
     }
     
@@ -119,42 +126,52 @@ fetch(`${url}/get-all-orders`, {
         
         locationButtons.forEach((button)=>{ button.addEventListener("click", ()=>{
             const orderId = button.getAttribute("id");
+			
+			locationModal.classList.remove("d-none");
+			
+			document.querySelectorAll(".body button").forEach((button)=>{
+				button.setAttribute("disabled", "");
+			});
+			
            
-			let newLocation = prompt("Kindly enter the present location of this order");
-			
-			if(newLocation){
+			newLocationButton.addEventListener("click", ()=>{
 				
-				        fetch(`${url}/change-location/${orderId}`, {
-    method: "PATCH",
-    headers: {
-        "Content-Type": "application/json", 
-         Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({
-        preslocation: newLocation
-    })
-})
-.then(res=> res.json())
-.then(res=>{
-    if(res.message=== `Order ${orderId} updated successfully`){
-       toastr.success("Success, order's present location updated!");
+			const newLocationValue = newLocation.value;
+				
+			if(newLocationValue){
+		      locationModal.classList.add("d-none");
+					
+		   fetch(`${url}/change-location/${orderId}`, {
+                      method: "PATCH",
+                      headers: {
+                     "Content-Type": "application/json", 
+                      Authorization: `Bearer ${token}`
+                     },
+                      body: JSON.stringify({
+                      preslocation: newLocationValue
+                   })
+                   })
+                   .then(res=> res.json())
+                   .then(res=>{
+                     if(res.message=== `Order ${orderId} updated successfully`){
+                     toastr.success("Success, order's present location updated!");
         
-		setTimeout(()=>{  window.location.href ="getallapporders.html";}, 2000);
-       
-    }
+		   setTimeout(()=>{  window.location.href ="getallapporders.html";}, 2000);
+                   }
     
-})
-.catch(err=>{
-    console.log("Error", err);
-});
+                  })
+                  .catch(err=>{
+                   console.log("Error", err);
+                    });
 			}
-			else{
-				return;
-			}
-//    }
-//}
-//			}
-			
+				else{
+					locationModal.classList.add("d-none");
+					
+					window.location.reload();
+				}
+		
+			});
+				
         });
     });
 
@@ -173,7 +190,6 @@ function filterByUsername(filter){
 		let searchInfo = order.innerHTML;
 		
 		if(searchInfo.includes(filter)){
-		 console.log(searchInfo);
 			order.parentElement.style.display ="block";
 		}
 		else{
