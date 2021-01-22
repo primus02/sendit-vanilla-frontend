@@ -272,11 +272,6 @@ button{
 		margin-left: 110px;
 	}
 }
-@media screen and (max-width: 550px){
-	.location1{
-		margin-left: 50px;
-	}
-}
 
 .present-location{
     color: cadetblue;
@@ -338,7 +333,7 @@ button{
 .admin-profile{
 	text-align: left;
 	border: 3px solid lightgray;
-	width: 400px;
+	width: 330px;
 	margin: 20px auto;
 	background-color:#efe3e3;
 	padding: 10px;
