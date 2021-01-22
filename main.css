@@ -272,6 +272,11 @@ button{
 		margin-left: 110px;
 	}
 }
+@media screen and (max-width: 550px){
+	.location1{
+		margin-left: 50px;
+	}
+}
 
 .present-location{
     color: cadetblue;
