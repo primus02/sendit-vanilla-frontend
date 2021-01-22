@@ -11,6 +11,8 @@ const inputMobile = document.querySelector(".input-mobile");
 
 const submitButton = document.querySelector(".submit-order");
 
+const myForm = document.querySelector("#form");
+
 const token = localStorage.getItem("token");
 const userName = localStorage.getItem("username");
 
@@ -26,7 +28,7 @@ signOutButton.addEventListener("click", ()=>{
     window.location.href = "index.html";
 });
 
-submitButton.addEventListener("click", submitOrder);
+myForm.addEventListener("submit", submitOrder);
 
 // Functions
 function calculatePrice(){
@@ -36,21 +38,10 @@ function calculatePrice(){
 function submitOrder(e){
     e.preventDefault();
 	
-	  const number = 234;
       const regex= /^[0-9]+$/;
-
-    if(inputLocation.value ==="" || inputDestination.value ==="" || inputPrice.value ==="" || inputWeight.value ==="" || inputMobile.value===""){
-		
-        toastr.warning("Kindly provide all necessary fields");
-        return;
-    }
 	
-	if(!inputMobile.value.includes(number) || !inputMobile.value.match(regex) || inputMobile.value.length < 13 || inputMobile.value.length > 13){
-		  toastr.error("Kindly provide a valid phone number");
-		  return false;
-	  }
 	if(!inputWeight.value.match(regex)){
-		toastr.info("Do not include any letter in the weight field");
+		toastr.info("Please enter a valid figure in the weight field (do not include any letter)");
 		return;
 	}
 	
