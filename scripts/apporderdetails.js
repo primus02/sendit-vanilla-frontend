@@ -7,7 +7,7 @@ const price = document.querySelector(".price");
 
 const createdDate = document.querySelector(".date");
 
-const pickLocation = document.querySelector(".location");
+const pickLocation = document.querySelector(".pick-location");
 
 const recNumber = document.querySelector(".mobile");
 
@@ -41,7 +41,7 @@ fetch(`${url}/get-an-order/${orderId}`, {
         price.innerHTML = res.order.price;
         pickLocation.innerHTML = res.order.location;
         destination.innerHTML = res.order.destination;
-		recNumber.innerHTML = res.order.recmobile;
+	recNumber.innerHTML = res.order.recmobile;
         createdDate.innerHTML = res.order.date;
     }
     
