@@ -13,14 +13,19 @@ const recNumber = document.querySelector(".mobile");
 
 const createdDate = document.querySelector(".date");
 
-const pickLocation = document.querySelector(".location");
+const pickLocation = document.querySelector(".pick-location");
 
 const destination = document.querySelector(".destination");
   
 const signOutButton = document.querySelector(".sign-out");
 
-const url = "https://sendit.herokuapp.com";
+const destinationModal = document.querySelector(".dest-modal");
 
+const newDestination = document.querySelector(".new-destination");
+
+const newDestButton = document.querySelector(".dest-modal button");
+
+const url = "https://sendit.herokuapp.com";
 const token = localStorage.getItem("token");
 
 const orderId = localStorage.getItem("orderId");
@@ -40,10 +45,22 @@ signOutButton.addEventListener("click", ()=>{
 
 editButton.addEventListener("click", ()=>{
     if(status === "pending"){
-    let newDestination =prompt("Kindly provide the new destination for this order");
+
+		destinationModal.classList.remove("d-none");
 		
-		if(newDestination){
-			
+			editButton.setAttribute("disabled", "");
+			cancelButton.setAttribute("disabled", "");
+		
+		newDestButton.addEventListener("click", ()=>{
+			const newDestinationValue = newDestination.value;
+						
+			if(newDestinationValue===""){
+				window.location.reload();
+			}
+			else{
+				
+				destinationModal.classList.add("d-none");
+							
 		fetch(`${url}/change-destination/search?username=${username}&id=${orderId}`, {
         method: "PATCH",
         headers: {
@@ -51,7 +68,7 @@ editButton.addEventListener("click", ()=>{
          Authorization: `Bearer ${token}`
        },
        body: JSON.stringify({
-        destination: newDestination
+        destination: newDestinationValue
       })
 })
 .then(res=> res.json())
@@ -68,10 +85,10 @@ editButton.addEventListener("click", ()=>{
 .catch(err=>{
     console.log("Error", err);
 });
-		}
-		else{
-			return;
-		}
+}
+		
+});
+
 	}
     else{
         toastr.info("Sorry! This order has already been delivered, else, you can no longer change its destination");
@@ -81,7 +98,7 @@ editButton.addEventListener("click", ()=>{
 
 cancelButton.addEventListener("click", ()=>{
     if(status === "pending"){
-     let decision= confirm("Are you sure you want to cancel this order?");
+     let decision= confirm("Are you sure you want to cancel this order? This cannot be reversed!");
 		if(decision){
 			fetch(`${url}/cancel-order/search?username=${username}&id=${orderId}`, {
             method: "DELETE",
