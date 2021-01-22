@@ -26,6 +26,16 @@
        
        
        <div class="main-body">
+		   
+		   <div class="dest-modal d-none">
+		       <p>Kindly provide the new destination for your order below and click on the submit button</p>
+			   
+			   <input type="text" class="new-destination" placeholder="Enter new destination"/>
+			   
+			   <p><button>Submit</button></p>
+		   </div>
+		   
+		   
            <header>
                <h1> Hello <span class="username"></span>!</h1>
            </header>
@@ -41,15 +51,15 @@
                     <p class="order">Order details;</p>
                     
 					<div class="order-info">
-						<label>Price(#): <span class="price"> </span></label><br>
+						<label>Price(#): </label><span class="price"> </span><br>
 
-						<label>Pick-Up Location: <span class="location"></span></label><br>
+						<label>Pick-Up Location: </label><span class="pick-location"></span><br>
 
-						<label>Destination: <span class="destination"></span></label><br>
+						<label>Destination: </label><span class="destination"></span><br>
 
-						<label>Recipient Mobile: <span class="mobile"></span></label><br>
+						<label>Recipient Mobile: </label><span class="mobile"></span><br>
 
-						<label>Date of creation: <span class="date"></span></label>
+						<label>Date of creation: </label><span class="date"></span>
 
 						<p><button class="edit">Edit-Destination</button><button class="cancel">Cancel-Order</button></p>
 					</div>
@@ -63,7 +73,22 @@
        <script src="./scripts/orderdetails.js"></script>
    </body>
     
+   	    <script>
+//Place Autocomplete Address Google API
+    function initAutocomplete() {
+     
+		
+		const options = {
+    componentRestrictions: {
+        country: 'ng'
+    }
+};
+
+      const autocompleteDestination = new google.maps.places.Autocomplete(newDestination, options);
+    }
     
-    
+	</script>
+	<script type="text/javascript" 
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsCpECdOd6XCeKdReJj7YPQrfYVwzeKSI&libraries=places&callback=initAutocomplete"></script>
     
 </html>
