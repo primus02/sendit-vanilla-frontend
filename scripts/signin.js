@@ -57,13 +57,14 @@ function signUserIn(e){
             localStorage.setItem("username", res.data[0].username);
             localStorage.setItem("name", res.data[0].name);
             localStorage.setItem("email", res.data[0].email);
-			localStorage.setItem("mobile", res.data[0].mobile);
-			localStorage.setItem("address", res.data[0].address);
+	    localStorage.setItem("mobile", res.data[0].mobile);
+	    localStorage.setItem("address", res.data[0].address);
+	    localStorage.setItem("userLoggedIn", true);
 			
 			toastr.success("Sign in successful!");
 			
             setTimeout(()=>{
-				window.location.href = "./user.html";
+			window.location.href = "./user.html";
 			},2000);  
         }
     })
