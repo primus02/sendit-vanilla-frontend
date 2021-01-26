@@ -7,6 +7,8 @@ const editButton = document.querySelector(".edit");
 
 const cancelButton = document.querySelector(".cancel");
 
+const weight = document.querySelector(".weight");
+
 const price = document.querySelector(".price");
 
 const recNumber = document.querySelector(".mobile");
@@ -21,20 +23,29 @@ const signOutButton = document.querySelector(".sign-out");
 
 const destinationModal = document.querySelector(".dest-modal");
 
+const destinationForm = document.querySelector(".dest-form");
+
 const newDestination = document.querySelector(".new-destination");
+
+const newPickLocation = document.querySelector(".new-picklocation");
+
+const newWeight = document.querySelector(".new-weight");
+
+const newPrice = document.querySelector(".new-price");
+
+const newMobile = document.querySelector(".new-mobile");
 
 const newDestButton = document.querySelector(".dest-modal button");
 
 const url = "https://sendit.herokuapp.com";
+
 const token = localStorage.getItem("token");
 
 const orderId = localStorage.getItem("orderId");
 
 const status = localStorage.getItem("status");
 
-cancelButton.setAttribute("id", `${orderId}`);
-
-editButton.setAttribute("id", `${orderId}`);
+const regex= /^[0-9]+$/;
 
 
 // Event Listeners
@@ -43,6 +54,7 @@ signOutButton.addEventListener("click", ()=>{
     window.location.href = "index.html";
 });
 
+
 editButton.addEventListener("click", ()=>{
     if(status === "pending"){
 
@@ -50,34 +62,55 @@ editButton.addEventListener("click", ()=>{
 		
 			editButton.setAttribute("disabled", "");
 			cancelButton.setAttribute("disabled", "");
+			
+			newWeight.addEventListener("keyup", ()=>{
+				newPrice.value = Number.parseFloat(newWeight.value) * 10;
+			})			
 		
-		newDestButton.addEventListener("click", ()=>{
-			const newDestinationValue = newDestination.value;
-						
-			if(newDestinationValue===""){
-				window.location.reload();
-			}
-			else{
-				
-				destinationModal.classList.add("d-none");
+		destinationForm.addEventListener("submit", (e)=>{
+			e.preventDefault();
+			
+
+		if(!newWeight.value.match(regex)){
+		toastr.info("Please enter a valid figure in the weight field (do not include any letter)");
+			
+		newWeight.focus();
+
+		return;
+	   }
+		else{
 							
-		fetch(`${url}/change-destination/search?username=${username}&id=${orderId}`, {
-        method: "PATCH",
+		fetch(`${url}/edit-order/search?username=${username}&id=${orderId}`, {
+        method: "PUT",
         headers: {
         "Content-Type": "application/json", 
          Authorization: `Bearer ${token}`
        },
        body: JSON.stringify({
-        destination: newDestinationValue
+		username,
+		location: newPickLocation.value,
+		price: newPrice.value,
+		weight: newWeight.value,
+        destination: newDestination.value,
+		recmobile: newMobile.value,
+		date: Date.now()
       })
 })
 .then(res=> res.json())
 .then(res=>{
-    if(res.message=== `Order ${orderId} updated successfully`){
+			
+	 if(res.message ==="jwt expired"){
+		alert("Session expired, kidnly re-login to access this page");
 		
-       toastr.success("Success, your order's new destination updated");
+		 localStorage.clear();
+		 window.location.href = "index.html";
+		  }		
+			
+        if(res.message=== `Order ${orderId} updated successfully`){
+		
+       toastr.success("Success, your order's new information updated");
         
-		setTimeout(()=>{ window.location.href ="getallorders.html";}, 2000);
+		setTimeout(()=>{ window.location.reload()}, 2000);
         
     }
     
@@ -98,7 +131,7 @@ editButton.addEventListener("click", ()=>{
 
 cancelButton.addEventListener("click", ()=>{
     if(status === "pending"){
-     let decision= confirm("Are you sure you want to cancel this order? This cannot be reversed!");
+     let decision= confirm("Are you sure you want to cancel this order? This cannot be reversed! Click 'OK' to continue");
 		if(decision){
 			fetch(`${url}/cancel-order/search?username=${username}&id=${orderId}`, {
             method: "DELETE",
@@ -109,6 +142,14 @@ cancelButton.addEventListener("click", ()=>{
 })
 .then(res=> res.json())
 .then(res=> {
+				
+  	if(res.message ==="jwt expired"){
+	  alert("Session expired, kidnly re-login to access this page");
+	
+         localStorage.clear();
+	 window.location.href = "index.html";
+		  }
+				
     if(res.success){
 		
        toastr.success("Success, your order has been cancelled");
@@ -129,7 +170,7 @@ cancelButton.addEventListener("click", ()=>{
         toastr.info("Sorry! This order has already been delivered");
         return;
     }
-})
+});
 
 // Functions
 
@@ -141,7 +182,16 @@ fetch(`${url}/get-order/search?username=${username}&id=${orderId}`, {
 })
 .then(res=> res.json())
 .then(res=>{
+	
+	 if(res.message ==="jwt expired"){
+	   alert("Session expired, kidnly re-login to access this page");
+		
+		localStorage.clear();
+		window.location.href = "index.html";
+		  }
+	
     if(res.message=== "Order found successfully"){
+		weight.innerHTML= res.order[0].weight;
         price.innerHTML = res.order[0].price;
         pickLocation.innerHTML = res.order[0].location;
         destination.innerHTML = res.order[0].destination;
