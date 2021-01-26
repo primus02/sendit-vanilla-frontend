@@ -38,6 +38,14 @@ setInterval(()=>{
   const submitForm = (event)=> {
       event.preventDefault();
   
+	   if(password.value.length < 6){
+		toastr.info("Password must be atleast 6 characters");
+		  
+		 password.focus();
+		  
+		 return false;
+	  }
+	  
 	  if(password.value !== confirmPassword.value){
 		  toastr.error("Passwords must match");
 		  return false;
