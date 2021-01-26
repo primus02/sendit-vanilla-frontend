@@ -28,6 +28,14 @@ fetch(`${url}/get-orders/search?username=${username}`, {
 })
 .then(res=> res.json())
 .then(res=>{
+    
+    if(res.message ==="jwt expired"){
+		 alert("Session expired, kidnly re-login to access this page");
+			 
+		    localStorage.clear();
+			window.location.href = "index.html";
+		  }
+    
     if(res.message=== "No order found"){
         ordersContainer.innerHTML = "You have no order yet";
     }
