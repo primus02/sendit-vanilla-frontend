@@ -3,15 +3,17 @@ const username = localStorage.getItem("username");
 const userName = document.querySelector(".username");
 userName.innerHTML = username;
 
+const weight = document.querySelector(".weight");
+
 const price = document.querySelector(".price");
 
-const createdDate1 = document.querySelector(".date");
+const createdDate = document.querySelector(".date");
 
-const pickLocation1 = document.querySelector(".pick-location");
+const pickLocation = document.querySelector(".pick-location");
 
-const recNumber1 = document.querySelector(".mobile");
+const recNumber = document.querySelector(".mobile");
 
-const destination1 = document.querySelector(".destination");
+const destination = document.querySelector(".destination");
   
 
 const signOutButton = document.querySelector(".sign-out");
@@ -37,12 +39,21 @@ fetch(`${url}/get-an-order/${orderId}`, {
 })
 .then(res=> res.json())
 .then(res=>{
+	
+	 if(res.message ==="jwt expired"){
+	    alert("Session expired, kidnly re-login to access this page");
+			  
+		 localStorage.clear();
+		 window.location.href = "adminsignin.html";
+	  }
+	
     if(res.message=== "Order found successfully"){
+	 weight.innerHTML = res.order.weight;
         price.innerHTML = res.order.price;
-        pickLocation1.innerHTML = res.order.location;
-        destination1.innerHTML = res.order.destination;
-	recNumber1.innerHTML = res.order.recmobile;
-        createdDate1.innerHTML = res.order.date;
+        pickLocation.innerHTML = res.order.location;
+        destination.innerHTML = res.order.destination;
+		recNumber.innerHTML = res.order.recmobile;
+        createdDate.innerHTML = res.order.date;
     }
     
 })
