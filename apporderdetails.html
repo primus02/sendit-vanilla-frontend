@@ -2,10 +2,20 @@
 <html>
    <head>
       <meta charset="utf-8"/>
-       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       
       <title>SendIT Project</title>
        
       <link rel="stylesheet" type="text/css" href="main.css">
+	   
+       <script>
+	       let adminLoggedIn= localStorage.getItem("adminLoggedIn");
+		   
+		   if(!adminLoggedIn){
+			   alert("Kindly sign in as an admin to access this page");
+			   
+			   window.location.href = "adminsignin.html";
+		   }
+	</script>
        
    </head>
    <body>
@@ -33,17 +43,20 @@
                 <div class="orders order-details">  
                     <p class="order">Order details;</p>
                     
-					<div class="order-info">
-						<label>Price(#): </label><span class="price"> </span><br>
+			<div class="order-info">
+						
+			    <label>Weight(Kg): </label><span class="weight"> </span><br>
+						
+			    <label>Price(#): </label><span class="price"> </span><br>
 
-						<label>Pick-Up Location: </label><span class="pick-location"></span><br>
+			    <label>Pick-Up Location: </label><span class="pick-location"></span><br>
 
-						<label>Destination: </label><span class="destination"></span><br>
+			    <label>Destination: </label><span class="destination"></span><br>
 
-						<label>Recipient Mobile: </label><span class="mobile"></span><br>
+			    <label>Recipient Mobile: </label><span class="mobile"></span><br>
 
-						<label>Date of creation: </label><span class="date"></span>
-					</div>
+			    <label>Date of creation: </label><span class="date"></span>
+		 </div>
                     
                </div>
 
