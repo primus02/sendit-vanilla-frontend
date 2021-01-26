@@ -6,6 +6,17 @@
       <title>SendIT Project</title>
        
       <link rel="stylesheet" type="text/css" href="main.css">
+	   
+	<script>
+	       let userLoggedIn= localStorage.getItem("userLoggedIn");
+		   
+		   if(!userLoggedIn){
+			   alert("Kindly sign in to access this page");
+			   
+			   window.location.href = "index.html";
+		   }
+		  
+	   </script>
        
    </head>
    <body>
@@ -30,8 +41,8 @@
                 <h3>The following are your orders.</h3>
                <p>To get more information about a particular order, use the details button.</p>
 			   
-			   <div class="orders-holder">
-			   </div>
+	       <div class="orders-holder">
+	       </div>
                
            </div>
        </div>
