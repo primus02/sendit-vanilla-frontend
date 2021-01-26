@@ -6,6 +6,17 @@
       <title>SendIT Project</title>
        
       <link rel="stylesheet" type="text/css" href="main.css">
+	   
+          <script>
+	       let adminLoggedIn= localStorage.getItem("adminLoggedIn");
+		   
+		   if(!adminLoggedIn){
+			   alert("Kindly sign in as an admin to access this page");
+			   
+			   window.location.href = "adminsignin.html";
+		   }
+		   
+	   </script>
        
    </head>
    <body>
