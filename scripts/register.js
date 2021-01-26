@@ -48,6 +48,7 @@ setInterval(()=>{
 	  
 	  if(password.value !== confirmPassword.value){
 		  toastr.error("Passwords must match");
+		  confirmPassword.focus();
 		  return false;
 	  }
 	  
