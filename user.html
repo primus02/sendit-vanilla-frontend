@@ -6,6 +6,16 @@
       <title>SendIT Project</title>
        
       <link rel="stylesheet" type="text/css" href="main.css">
+      
+      <script>
+	       let userLoggedIn= localStorage.getItem("userLoggedIn");
+		   
+		   if(!userLoggedIn){
+			   alert("Kindly sign in to access this page");
+			   
+			   window.location.href = "index.html";
+		   }
+	   </script>
        
    </head>
    <body>
