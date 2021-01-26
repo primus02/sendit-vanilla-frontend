@@ -2,7 +2,7 @@
 <html>
    <head>
       <meta charset="utf-8"/>
-       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       
       <title>SendIT Project</title>
 	   
 	   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -10,6 +10,17 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
        
       <link rel="stylesheet" type="text/css" href="main.css">
+	   
+	<script>
+	       let adminLoggedIn= localStorage.getItem("adminLoggedIn");
+		   
+		   if(!adminLoggedIn){
+			   alert("Kindly sign in as an admin to access this page");
+			   
+			   window.location.href = "adminsignin.html";
+		   }
+	   </script>
+	   
        
    </head>
    <body>
@@ -34,8 +45,21 @@
 			   <p><button>Submit</button></p>
 		   </div>
 		   
+		   <div class="status-modal d-none">
+		       <p>Kindly select the new status for this order below and click on the submit button</p>
+			   
+			  <select class="select">
+				 <option value="">Select Status</option>
+				 <option value="pending">Pending</option>
+				 <option value="delivered">Delivered</option>
+				 <option value="cancelled">Cancelled</option>
+			  </select>
+			   
+			   <p><button>Submit</button></p>
+		   </div>
+		   
            <header>
-			   <h1> Hello Admin <span class="username"></span>!</h1>
+	        <h1> Hello Admin <span class="username"></span>!</h1>
            </header>
 
 
