@@ -39,6 +39,7 @@ function signAdminIn(){
         else if(res.token){
             localStorage.setItem("token", res.token);
             localStorage.setItem("username", res.data[0].username);
+	    localStorage.setItem("adminLoggedIn", true);
 			
 			toastr.success("Successfully signed in");
            
