@@ -42,6 +42,7 @@ function submitOrder(e){
 	
 	if(!inputWeight.value.match(regex)){
 		toastr.info("Please enter a valid figure in the weight field (do not include any letter)");
+		inputWeight.focus();
 		return;
 	}
 	
@@ -64,6 +65,14 @@ function submitOrder(e){
         })
         .then(res=> res.json())
         .then(res=>{
+		
+	 if(res.message ==="jwt expired"){
+			  alert("Session expired, kidnly re-login to access this page");
+			  
+			  localStorage.clear();
+			  window.location.href = "index.html";
+	   }	
+	
             if(res.message=== "Order created successfully"){
 				
                 toastr.success("Order created successfully!");
