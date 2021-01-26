@@ -99,7 +99,7 @@ editButton.addEventListener("click", ()=>{
 .then(res=> res.json())
 .then(res=>{
 			
-	 if(res.message ==="jwt expired"){
+	 if(res.message.message ==="jwt expired"){
 		alert("Session expired, kidnly re-login to access this page");
 		
 		 localStorage.clear();
@@ -143,7 +143,7 @@ cancelButton.addEventListener("click", ()=>{
 .then(res=> res.json())
 .then(res=> {
 				
-  	if(res.message ==="jwt expired"){
+  	if(res.message.message ==="jwt expired"){
 	  alert("Session expired, kidnly re-login to access this page");
 	
          localStorage.clear();
@@ -183,7 +183,7 @@ fetch(`${url}/get-order/search?username=${username}&id=${orderId}`, {
 .then(res=> res.json())
 .then(res=>{
 	
-	 if(res.message ==="jwt expired"){
+	 if(res.message.message ==="jwt expired"){
 	   alert("Session expired, kidnly re-login to access this page");
 		
 		localStorage.clear();
