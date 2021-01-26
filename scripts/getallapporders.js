@@ -11,9 +11,15 @@ const ordersHolder = document.querySelector(".orders-holder");
 
 const locationModal = document.querySelector(".location-modal");
 
+const statusModal = document.querySelector(".status-modal");
+
 const newLocation = document.querySelector(".new-location");
 
+const selectStatus = document.querySelector(".select");
+
 const newLocationButton = document.querySelector(".location-modal button");
+
+const submitStatusButton = document.querySelector(".status-modal button");
 
 
 const signOutButton = document.querySelector(".sign-out");
@@ -26,10 +32,11 @@ signOutButton.addEventListener("click", ()=>{
 });
 
 ordersContainer.addEventListener("keyup",(e)=>{
-  let filter = e.target.value;
+      let filter = e.target.value;
 			
-  filterByUsername(filter);
+     filterByUsername(filter);
 });
+
 
 
 const url = "https://sendit.herokuapp.com";
@@ -45,6 +52,14 @@ fetch(`${url}/get-all-orders`, {
 })
 .then(res=> res.json())
 .then(res=>{
+	
+	 if(res.message ==="jwt expired"){
+		alert("Session expired, kidnly re-login to access this page");
+		
+		localStorage.clear();
+		window.location.href = "adminsignin.html";
+		  }
+	
     if(res.message=== "No order found"){
         ordersContainer.innerHTML = "No order yet";
     }
@@ -75,9 +90,6 @@ fetch(`${url}/get-all-orders`, {
             const orderId = button.getAttribute("id");
             localStorage.setItem("orderId", orderId);
             
-            const status = button.getAttribute("status");
-            localStorage.setItem("status", status);
-            
             window.location.href = "apporderdetails.html";
         });
     });
@@ -87,27 +99,45 @@ fetch(`${url}/get-all-orders`, {
         statusButtons.forEach((button)=>{ button.addEventListener("click", ()=>{
             const orderId = button.getAttribute("id");
 			
-	   let newStatus = prompt("Kindly enter the new status of this order");
+			statusModal.classList.remove("d-none");
 			
-	  if(newStatus){
+			document.querySelectorAll(".body button").forEach((button)=>{
+				button.setAttribute("disabled", "");
+			});
+			
+			submitStatusButton.addEventListener("click",()=>{
+				
+			if(selectStatus.value ===""){
+			toastr.info("You have not selected a new status for this order");
+				return;
+			}
+			else{
             
-   fetch(`${url}/change-status/${orderId}`, {
-    method: "PATCH",
-    headers: {
-        "Content-Type": "application/json", 
-         Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({
-        status: newStatus.toLowerCase()
-    })
+			 fetch(`${url}/change-status/${orderId}`, {
+             method: "PATCH",
+             headers: {
+             "Content-Type": "application/json", 
+             Authorization: `Bearer ${token}`
+            },
+           body: JSON.stringify({
+           status: selectStatus.value
+          })
 })
 .then(res=> res.json())
 .then(res=>{
+				 
+	if(res.message ==="jwt expired"){
+		alert("Session expired, kidnly re-login to access this page");
+		
+		localStorage.clear();
+		window.location.href = "adminsignin.html";
+		  }			 
+				 
     if(res.message=== `Order ${orderId} updated successfully`){
 		
        toastr.success("Success, order's new status updated!");
         
-       setTimeout(()=>{ window.location.href ="getallapporders.html";}, 2000);
+		setTimeout(()=>{ window.location.reload();}, 2000);
         
     }
     
@@ -115,10 +145,10 @@ fetch(`${url}/get-all-orders`, {
 .catch(err=>{
     console.log("Error", err);
 });
-	}
-     else{
-		 return;
-	 }       
+	}     			
+			});
+			
+
         });
     });
 		
@@ -136,38 +166,44 @@ fetch(`${url}/get-all-orders`, {
            
 			newLocationButton.addEventListener("click", ()=>{
 				
-			const newLocationValue = newLocation.value;
-				
-			if(newLocationValue){
-		      locationModal.classList.add("d-none");
+			if(newLocation.value !==""){
 					
-		   fetch(`${url}/change-location/${orderId}`, {
-                      method: "PATCH",
-                      headers: {
-                     "Content-Type": "application/json", 
-                      Authorization: `Bearer ${token}`
-                     },
-                      body: JSON.stringify({
-                      preslocation: newLocationValue
-                   })
-                   })
-                   .then(res=> res.json())
-                   .then(res=>{
-                     if(res.message=== `Order ${orderId} updated successfully`){
-                     toastr.success("Success, order's present location updated!");
+			fetch(`${url}/change-location/${orderId}`, {
+    method: "PATCH",
+    headers: {
+        "Content-Type": "application/json", 
+         Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+        preslocation: newLocation.value
+    })
+})
+.then(res=> res.json())
+.then(res=>{
+				
+	if(res.message ==="jwt expired"){
+		alert("Session expired, kidnly re-login to access this page");
+		
+		localStorage.clear();
+		window.location.href = "adminsignin.html";
+		  }
+				
+    if(res.message=== `Order ${orderId} updated successfully`){
+       toastr.success("Success, order's present location updated!");
         
-		   setTimeout(()=>{  window.location.href ="getallapporders.html";}, 2000);
-                   }
+		setTimeout(()=>{  window.location.reload();}, 2000);
+       
+    }
     
-                  })
-                  .catch(err=>{
-                   console.log("Error", err);
-                    });
+})
+.catch(err=>{
+    console.log("Error", err);
+});
 			}
 				else{
-					locationModal.classList.add("d-none");
+				    toastr.info("You have not entered any new location!");
 					
-					window.location.reload();
+					return;
 				}
 		
 			});
