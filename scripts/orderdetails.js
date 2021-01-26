@@ -37,6 +37,8 @@ const newMobile = document.querySelector(".new-mobile");
 
 const newDestButton = document.querySelector(".dest-modal button");
 
+const orderInfo = document.querySelector(".order-info p");
+
 const url = "https://sendit.herokuapp.com";
 
 const token = localStorage.getItem("token");
@@ -55,8 +57,16 @@ signOutButton.addEventListener("click", ()=>{
 });
 
 
+function hideButtons(){
+	if(status === "delivered"){
+		orderInfo.innerHTML ="Status: Delivered";
+		orderInfo.style.color = "green";
+		orderInfo.style.fontWeight= "900";
+	}
+}hideButtons();
+
+
 editButton.addEventListener("click", ()=>{
-    if(status === "pending"){
 
 		destinationModal.classList.remove("d-none");
 		
@@ -101,12 +111,12 @@ editButton.addEventListener("click", ()=>{
 			
 	 if(res.message.message ==="jwt expired"){
 		alert("Session expired, kidnly re-login to access this page");
-		
+			
 		 localStorage.clear();
 		 window.location.href = "index.html";
 		  }		
 			
-        if(res.message=== `Order ${orderId} updated successfully`){
+    if(res.message=== `Order ${orderId} updated successfully`){
 		
        toastr.success("Success, your order's new information updated");
         
@@ -122,15 +132,10 @@ editButton.addEventListener("click", ()=>{
 		
 });
 
-	}
-    else{
-        toastr.info("Sorry! This order has already been delivered, else, you can no longer change its destination");
-        return;
-    }
 });
 
 cancelButton.addEventListener("click", ()=>{
-    if(status === "pending"){
+  
      let decision= confirm("Are you sure you want to cancel this order? This cannot be reversed! Click 'OK' to continue");
 		if(decision){
 			fetch(`${url}/cancel-order/search?username=${username}&id=${orderId}`, {
@@ -146,7 +151,7 @@ cancelButton.addEventListener("click", ()=>{
   	if(res.message.message ==="jwt expired"){
 	  alert("Session expired, kidnly re-login to access this page");
 	
-         localStorage.clear();
+	localStorage.clear();
 	 window.location.href = "index.html";
 		  }
 				
@@ -165,11 +170,6 @@ cancelButton.addEventListener("click", ()=>{
 		else{
 			return;
 		}
-    }
-    else{
-        toastr.info("Sorry! This order has already been delivered");
-        return;
-    }
 });
 
 // Functions
