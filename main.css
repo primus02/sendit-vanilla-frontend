@@ -278,7 +278,7 @@ button{
 	text-transform: capitalize;
 	font-size: 12px;
 }
-.dest-modal, .location-modal{
+.dest-modal, .location-modal, .status-modal{
 	width: 400px;
 	margin: 10px auto;
 	display: flex;
@@ -299,6 +299,14 @@ button{
 	padding: 3px;
 	margin-top: 10px;
 	height: 30px;
+}
+select{
+	width: 150px;
+	height: 30px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	font-size: 18px;
+	border-radius: 5px;
 }
 
 /** ADMIN PAGE **/
