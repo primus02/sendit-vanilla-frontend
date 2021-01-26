@@ -2,14 +2,25 @@
 <html>
    <head>
       <meta charset="utf-8"/>
-       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       
       <title>SendIT Project</title>
 	   
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
        
-      <link rel="stylesheet" type="text/css" href="main.css">
+        <link rel="stylesheet" type="text/css" href="main.css">
+	   
+	  <script>
+	       let userLoggedIn= localStorage.getItem("userLoggedIn");
+		   
+		   if(!userLoggedIn){
+			   alert("Kindly sign in to access this page");
+			   
+			   window.location.href = "index.html";
+		   }
+		  
+	   </script>
 	   
        
    </head>
@@ -28,11 +39,21 @@
        <div class="main-body">
 		   
 		   <div class="dest-modal d-none">
-		       <p>Kindly provide the new destination for your order below and click on the submit button</p>
+		       <p>Kindly provide the new details for your order below and click on the submit button</p>
 			   
-			   <input type="text" class="new-destination" placeholder="Enter new destination"/>
-			   
-			   <p><button>Submit</button></p>
+			   <form class="dest-form">
+				   <input type="text" class="new-picklocation" placeholder="Enter new pick-up location" required/>
+
+				   <input type="text" class="new-destination" placeholder="Enter new destination" required/>
+
+				   <input type="text" class="new-weight" placeholder="Enter the new weight" required/>
+
+				   <input type="number" class="new-price" placeholder="new price" disabled required/>
+
+				   <input type="tel" class="new-mobile" placeholder="Enter new recipient mobile"  pattern="\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$" required/>
+
+				   <p><button>Submit</button></p>
+			   </form>
 		   </div>
 		   
 		   
@@ -45,12 +66,15 @@
                
                <h3>Here are the details of your order.</h3>
                     
-                <p> Use the edit button to change the destination of your order and <br> the cancel button to cancel your order</p>
+                <p> Use the edit button to change the information of your order and <br> the cancel button to cancel your order</p>
                
                 <div class="orders order-details">  
                     <p class="order">Order details;</p>
                     
 					<div class="order-info">
+						
+						<label>Weight(Kg): </label><span class="weight"> </span><br>
+						
 						<label>Price(#): </label><span class="price"> </span><br>
 
 						<label>Pick-Up Location: </label><span class="pick-location"></span><br>
@@ -61,7 +85,7 @@
 
 						<label>Date of creation: </label><span class="date"></span>
 
-						<p><button class="edit">Edit-Destination</button><button class="cancel">Cancel-Order</button></p>
+						<p><button class="edit">Edit-Order</button><button class="cancel">Cancel-Order</button></p>
 					</div>
                </div>
 
@@ -85,6 +109,9 @@
 };
 
       const autocompleteDestination = new google.maps.places.Autocomplete(newDestination, options);
+		
+	 const autocompleteLocation = new google.maps.places.Autocomplete(newPickLocation, options);
+		
     }
     
 	</script>
