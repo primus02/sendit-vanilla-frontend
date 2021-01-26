@@ -28,6 +28,14 @@ fetch(`${url}/get-all-orders`, {
 })
 .then(res=>res.json())
 .then(res=>{
+      
+      if(res.message ==="jwt expired"){
+		alert("Session expired, kidnly re-login to access this page");
+		
+		 localStorage.clear();
+		window.location.href = "adminsignin.html";
+		 }
+      
     if(res.message === "No order found"){
        document.querySelector(".total-num").innerHTML ="No order yet";
     }
