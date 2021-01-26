@@ -40,7 +40,7 @@ fetch(`${url}/get-an-order/${orderId}`, {
 .then(res=> res.json())
 .then(res=>{
 	
-	 if(res.message ==="jwt expired"){
+	 if(res.message.message ==="jwt expired"){
 	    alert("Session expired, kidnly re-login to access this page");
 			  
 		 localStorage.clear();
