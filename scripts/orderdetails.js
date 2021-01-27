@@ -39,6 +39,8 @@ const newDestButton = document.querySelector(".dest-modal button");
 
 const orderInfo = document.querySelector(".order-info p");
 
+const buttonInfo = document.querySelector(".button-info");
+
 const url = "https://sendit.herokuapp.com";
 
 const token = localStorage.getItem("token");
@@ -59,6 +61,7 @@ signOutButton.addEventListener("click", ()=>{
 
 function hideButtons(){
 	if(status === "delivered"){
+		buttonInfo.classList.add("d-none");
 		orderInfo.innerHTML ="Status: Delivered";
 		orderInfo.style.color = "green";
 		orderInfo.style.fontWeight= "900";
