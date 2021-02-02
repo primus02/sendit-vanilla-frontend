@@ -6,6 +6,16 @@
       <title>SendIT Project</title>
        
       <link rel="stylesheet" type="text/css" href="main.css">
+      
+       <script>
+	       let userLoggedIn= localStorage.getItem("userLoggedIn");
+		   
+		   if(userLoggedIn){
+			   
+			   window.location.href = "profile.html";
+		   }
+			
+	   </script>
        
    </head>
    <body>
